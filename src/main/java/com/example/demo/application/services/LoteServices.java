@@ -1,17 +1,16 @@
 package com.example.demo.application.services;
 
 import com.example.demo.application.dto.LoteDto;
+import com.example.demo.application.dto.ProductoDto;
 import com.example.demo.application.port.out.LoteRepositoryPort;
 import com.example.demo.application.port.out.ProductoRepositoryPort;
-import com.example.demo.infraestructure.adapters.Jpa.JpaRepository.ProductoJpaRepository;
 import com.example.demo.domain.models.Lote;
+import com.example.demo.infraestructure.adapters.Jpa.Mapper.LoteMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
-import com.example.demo.infraestructure.adapters.Jpa.Mapper.LoteMapper;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class LoteServices {
@@ -36,13 +35,19 @@ public class LoteServices {
     public LoteDto getById(Long id) {
         return loteRepositoryPort.getById(id)
                 .map(dtoMapper::ofModelToDto)
-                .orElseThrow(() -> new RuntimeException("Lote no encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lote no encontrado"));
     }
     
     public LoteDto save(LoteDto dto) {
-        if(dto.getProductoId() == null) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "productoId is required");
-        com.example.demo.application.dto.ProductoDto prodDto = productoRepositoryPort.getById(dto.getProductoId());
-        if(prodDto == null) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Producto not found");
+        if (dto.getProductoId() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "productoId is required");
+        }
+
+        ProductoDto prodDto = productoRepositoryPort.getById(dto.getProductoId());
+        if (prodDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto not found");
+        }
+
         Lote lote = dtoMapper.ofDtoToModel(dto);
         Lote saved = loteRepositoryPort.save(lote, dto.getProductoId());
         return dtoMapper.ofModelToDto(saved);
@@ -50,12 +55,12 @@ public class LoteServices {
 
     public LoteDto toggleNotification(Long loteId, boolean enabled){
         java.util.Optional<Lote> maybe = loteRepositoryPort.getById(loteId);
-        Lote lote = maybe.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Lote not found"));
+        Lote lote = maybe.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lote not found"));
         try{
             java.lang.reflect.Field f = Lote.class.getDeclaredField("notificacionActiva");
             f.setAccessible(true);
             f.set(lote, enabled);
-        }catch(Exception ex){ throw new RuntimeException(ex); }
+        }catch(Exception ex){ throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex); }
         Lote saved = loteRepositoryPort.save(lote);
         return dtoMapper.ofModelToDto(saved);
     }
