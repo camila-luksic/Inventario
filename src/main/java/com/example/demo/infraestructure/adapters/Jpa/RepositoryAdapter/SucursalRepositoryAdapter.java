@@ -6,7 +6,10 @@ import com.example.demo.infraestructure.adapters.Jpa.JpaRepository.SucursalJpaRe
 import com.example.demo.application.port.out.SucursalRepositoryPort;
 import com.example.demo.infraestructure.adapters.Jpa.Mapper.SucursalMapper;
 import com.example.demo.infraestructure.adapters.entity.SucursalEntity;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -35,7 +38,7 @@ public class SucursalRepositoryAdapter implements SucursalRepositoryPort {
         if(s.getNombre() != null){
             var other = sucursalRepository.findAll().stream().filter(en -> en.getNombre().equalsIgnoreCase(s.getNombre())).findFirst().orElse(null);
             if(other != null && (s.getId() == 0 || other.getId() != s.getId())){
-                throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.CONFLICT, "Sucursal name already exists");
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Sucursal name already exists");
             }
         }
 
