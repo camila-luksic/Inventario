@@ -2,8 +2,11 @@ package com.example.demo.infraestructure.adapters.Jpa.RepositoryAdapter;
 
 import com.example.demo.application.dto.MovimientoInventarioDto;
 import com.example.demo.infraestructure.adapters.Jpa.Mapper.MovimientoInventarioMapper;
+import com.example.demo.infraestructure.adapters.entity.MovimientoInventarioEntity;
 import com.example.demo.infraestructure.adapters.Jpa.JpaRepository.MovimientoInventarioJpaRepository;
 import com.example.demo.application.port.out.MovimientoInventarioRepositoryPort;
+import com.example.demo.domain.models.MovimientoInventario;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +29,8 @@ public class MovimientoInventarioRepositoryAdapter implements MovimientoInventar
     }
 
     @Override
-    public MovimientoInventarioDto save(com.example.demo.domain.models.MovimientoInventario movimiento){
-        com.example.demo.infraestructure.adapters.entity.MovimientoInventarioEntity e = new com.example.demo.infraestructure.adapters.entity.MovimientoInventarioEntity(
+    public MovimientoInventarioDto save(MovimientoInventario movimiento){
+        MovimientoInventarioEntity e = new MovimientoInventarioEntity(
                 null,
                 null,
                 null,
