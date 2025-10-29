@@ -6,7 +6,9 @@ import com.example.demo.application.port.out.MarcaRepositoryPort;
 import com.example.demo.application.port.out.ProductoRepositoryPort;
 import com.example.demo.domain.models.Marca;
 import com.example.demo.domain.models.Producto;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,12 +28,12 @@ public class ProductoServices {
 
     public ProductoDto save(ProductoDto dto){
        if(dto.getMarcaId() == null){
-            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "marcaId is required");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "marcaId is required");
         }
 
         MarcaDto mDto = marcaRepository.getById(dto.getMarcaId());
         if(mDto == null){
-            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Marca not found with id=" + dto.getMarcaId());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Marca not found with id=" + dto.getMarcaId());
         }
 
         Marca marca = new Marca(mDto.getId(), mDto.getNombre());
@@ -47,9 +49,9 @@ public class ProductoServices {
     }
 
     public ProductoDto update(long id, ProductoDto dto){
-        if(dto.getMarcaId() == null) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "marcaId is required");
+        if(dto.getMarcaId() == null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "marcaId is required");
         MarcaDto mDto = marcaRepository.getById(dto.getMarcaId());
-        if(mDto == null) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Marca not found with id=" + dto.getMarcaId());
+        if(mDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Marca not found with id=" + dto.getMarcaId());
 
         Marca marca = new Marca(mDto.getId(), mDto.getNombre());
         Producto p = new Producto(id, dto.getNombre(), marca, dto.getDescripcion(), dto.isActivo());
