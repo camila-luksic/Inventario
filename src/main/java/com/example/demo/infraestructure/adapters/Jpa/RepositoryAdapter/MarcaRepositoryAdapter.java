@@ -6,7 +6,10 @@ import com.example.demo.infraestructure.adapters.Jpa.JpaRepository.MarcaJpaRepos
 import com.example.demo.application.port.out.MarcaRepositoryPort;
 import com.example.demo.infraestructure.adapters.Jpa.Mapper.MarcaMapper;
 import com.example.demo.infraestructure.adapters.entity.MarcaEntity;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -36,7 +39,7 @@ public class MarcaRepositoryAdapter implements MarcaRepositoryPort {
         if(m.getNombre() != null){
             var other = marcaRepository.findAll().stream().filter(en -> en.getNombre().equalsIgnoreCase(m.getNombre())).findFirst().orElse(null);
             if(other != null && (m.getId() == 0 || other.getId() != m.getId())){
-                throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.CONFLICT, "Marca name already exists");
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Marca name already exists");
             }
         }
 
