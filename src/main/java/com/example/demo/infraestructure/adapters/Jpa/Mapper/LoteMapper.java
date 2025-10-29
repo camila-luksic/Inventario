@@ -2,7 +2,9 @@ package com.example.demo.infraestructure.adapters.Jpa.Mapper;
 
 import com.example.demo.application.dto.LoteDto;
 import com.example.demo.domain.models.Lote;
+import com.example.demo.domain.models.Producto;
 import com.example.demo.infraestructure.adapters.entity.LoteEntity;
+import com.example.demo.infraestructure.adapters.entity.ProductoEntity;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
@@ -35,8 +37,8 @@ public class LoteMapper {
        return ofModelToEntity(lote, null);
     }
 
-    public LoteEntity ofModelToEntity(Lote lote, com.example.demo.infraestructure.adapters.entity.ProductoEntity productoEntity) {
-        com.example.demo.infraestructure.adapters.entity.ProductoEntity p = productoEntity;
+    public LoteEntity ofModelToEntity(Lote lote, ProductoEntity productoEntity) {
+        ProductoEntity p = productoEntity;
        return new LoteEntity(
             p,
             lote.getCodigoLote(),
@@ -46,9 +48,9 @@ public class LoteMapper {
     }
     
     public Lote ofEntityToModel(LoteEntity entity) {
-        com.example.demo.domain.models.Producto producto = null;
+        Producto producto = null;
         if(entity.getProducto() != null) {
-            producto = new com.example.demo.domain.models.Producto(
+            producto = new Producto(
                 entity.getProducto().getId(),
                 entity.getProducto().getNombre(),
                 null,
@@ -66,4 +68,3 @@ public class LoteMapper {
         );
     }
 }
-
