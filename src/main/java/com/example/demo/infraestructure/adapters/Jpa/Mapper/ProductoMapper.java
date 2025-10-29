@@ -2,6 +2,7 @@ package com.example.demo.infraestructure.adapters.Jpa.Mapper;
 
 import com.example.demo.application.dto.ProductoDto;
 import com.example.demo.domain.models.Producto;
+import com.example.demo.infraestructure.adapters.entity.MarcaEntity;
 import com.example.demo.infraestructure.adapters.entity.ProductoEntity;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductoMapper {
-    public ProductoEntity ofModeltoEntity(Producto p, com.example.demo.infraestructure.adapters.entity.MarcaEntity marcaEntity){
+    public ProductoEntity ofModeltoEntity(Producto p, MarcaEntity marcaEntity){
         ProductoEntity e = new ProductoEntity(p.getNombre(), marcaEntity, p.getDescripcion(), p.isActivo());
         return e;
     }
