@@ -22,7 +22,7 @@ public class MarcaServices {
     public MarcaDto update(long id, Marca m){
         MarcaDto existing = marcaRepository.getById(id);
         if(existing == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Marca not found");
-        Marca marcaToSave = new Marca(id, m.getNombre());
+        Marca marcaToSave = new Marca(id, m.getNombre(), m.getFoto());
         return marcaRepository.save(marcaToSave);
     }
 

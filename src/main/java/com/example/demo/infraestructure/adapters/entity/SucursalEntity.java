@@ -19,11 +19,19 @@ public class SucursalEntity {
     @Column(nullable=false, length=250)
     private String direccion;
 
+    @Column(length = 100)
+    private String horarioApertura;
+
+    @Column(length = 100)
+    private String horarioCierre;
+
     protected SucursalEntity() { }
 
-    public SucursalEntity(String nombre, String direccion) {
+    public SucursalEntity(String nombre, String direccion, String horarioApertura, String horarioCierre) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.horarioApertura = horarioApertura;
+        this.horarioCierre = horarioCierre;
     }
 
     public Long getId() { return id; }
@@ -32,4 +40,8 @@ public class SucursalEntity {
 
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setDireccion(String direccion) { this.direccion = direccion; }
+    public String getHorarioApertura() { return horarioApertura; }
+    public void setHorarioApertura(String horarioApertura) { this.horarioApertura = horarioApertura; }
+    public String getHorarioCierre() { return horarioCierre; }
+    public void setHorarioCierre(String horarioCierre) { this.horarioCierre = horarioCierre; }
 }

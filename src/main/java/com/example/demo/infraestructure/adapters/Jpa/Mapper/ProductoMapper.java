@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductoMapper {
     public ProductoEntity ofModeltoEntity(Producto p, MarcaEntity marcaEntity){
-        ProductoEntity e = new ProductoEntity(p.getNombre(), marcaEntity, p.getDescripcion(), p.isActivo());
+        ProductoEntity e = new ProductoEntity(p.getNombre(), marcaEntity, p.getDescripcion(), p.isActivo(), p.getFoto());
         return e;
     }
 
     public ProductoDto ofEntitytoDto(ProductoEntity e){
-        return new ProductoDto(e.getId(), e.getNombre(), e.getMarca() != null ? e.getMarca().getId() : null, e.getDescripcion(), e.isActivo());
+        return new ProductoDto(e.getId(), e.getNombre(), e.getMarca() != null ? e.getMarca().getId() : null, e.getDescripcion(), e.isActivo(), e.getFoto());
     }
 
     public List<ProductoDto> offEntitytoDto(List<ProductoEntity> list){

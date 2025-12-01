@@ -50,6 +50,7 @@ public class ProductoRepositoryAdapter implements ProductoRepositoryPort {
                 if(marcaEntity != null) existing.setMarca(marcaEntity);
                 existing.setDescripcion(p.getDescripcion());
                 existing.setActivo(p.isActivo());
+                existing.setFoto(p.getFoto());
                 ProductoEntity saved = productoRepository.save(existing);
                 return productoMapper.ofEntitytoDto(saved);
             }

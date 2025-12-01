@@ -30,13 +30,17 @@ public class ProductoEntity {
     @Column(nullable = false)
     private boolean activo = true;
 
+    @Column(length = 500)
+    private String foto;
+
     protected ProductoEntity() { }
 
-    public ProductoEntity(String nombre, MarcaEntity marca, String descripcion, boolean activo) {
+    public ProductoEntity(String nombre, MarcaEntity marca, String descripcion, boolean activo, String foto) {
         this.nombre = nombre;
         this.marca = marca;
         this.descripcion = descripcion;
         this.activo = activo;
+        this.foto = foto;
     }
 
     public Long getId() { return id; }
@@ -49,4 +53,6 @@ public class ProductoEntity {
     public void setMarca(MarcaEntity marca) { this.marca = marca; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     public void setActivo(boolean activo) { this.activo = activo; }
+    public String getFoto() { return foto; }
+    public void setFoto(String foto) { this.foto = foto; }
 }

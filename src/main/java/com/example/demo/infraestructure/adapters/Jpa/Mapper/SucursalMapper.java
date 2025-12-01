@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SucursalMapper {
     public SucursalEntity ofModeltoEntity(Sucursal s){
-        return new SucursalEntity(s.getNombre(), s.getDireccion());
+        return new SucursalEntity(s.getNombre(), s.getDireccion(), s.getHorarioApertura(), s.getHorarioCierre());
     }
 
     public SucursalDto ofEntitytoDto(SucursalEntity e){
-        return new SucursalDto(e.getId(), e.getNombre(), e.getDireccion());
+        return new SucursalDto(e.getId(), e.getNombre(), e.getDireccion(), e.getHorarioApertura(), e.getHorarioCierre());
     }
 
     public List<SucursalDto> offEntitytoDto(List<SucursalEntity> list){

@@ -16,13 +16,19 @@ public class MarcaEntity {
     @Column(nullable = false, length = 120)
     private String nombre;
 
+    @Column(length = 500)
+    private String foto;
+
     protected MarcaEntity() { }
 
-    public MarcaEntity(String nombre) {
+    public MarcaEntity(String nombre, String foto) {
         this.nombre = nombre;
+        this.foto = foto;
     }
 
     public Long getId() { return id; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getFoto() { return foto; }
+    public void setFoto(String foto) { this.foto = foto; }
 }

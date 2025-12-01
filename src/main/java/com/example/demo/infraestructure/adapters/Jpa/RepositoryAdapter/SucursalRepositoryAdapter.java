@@ -47,6 +47,8 @@ public class SucursalRepositoryAdapter implements SucursalRepositoryPort {
             if(existing != null){
                 existing.setNombre(s.getNombre());
                 existing.setDireccion(s.getDireccion());
+                existing.setHorarioApertura(s.getHorarioApertura());
+                existing.setHorarioCierre(s.getHorarioCierre());
                 SucursalEntity saved = sucursalRepository.save(existing);
                 return sucursalMapper.ofEntitytoDto(saved);
             }

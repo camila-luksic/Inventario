@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MarcaMapper {
     public MarcaEntity ofModeltoEntity(Marca m){
-        MarcaEntity e = new MarcaEntity(m.getNombre());
+        MarcaEntity e = new MarcaEntity(m.getNombre(), m.getFoto());
         return e;
     }
 
     public MarcaDto ofEntitytoDto(MarcaEntity e){
-        return new MarcaDto(e.getId(), e.getNombre());
+        return new MarcaDto(e.getId(), e.getNombre(), e.getFoto());
     }
 
     public List<MarcaDto> offEntitytoDto(List<MarcaEntity> list){

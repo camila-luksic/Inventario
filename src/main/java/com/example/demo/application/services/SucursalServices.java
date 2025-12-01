@@ -21,7 +21,7 @@ public class SucursalServices {
     public SucursalDto update(long id, Sucursal s){
         SucursalDto existing = sucursalRepository.getById(id);
         if(existing == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sucursal not found");
-        Sucursal toSave = new Sucursal(id, s.getNombre(), s.getDireccion());
+        Sucursal toSave = new Sucursal(id, s.getNombre(), s.getDireccion(), s.getHorarioApertura(), s.getHorarioCierre());
         return sucursalRepository.save(toSave);
     }
 

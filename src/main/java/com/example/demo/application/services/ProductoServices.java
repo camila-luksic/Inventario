@@ -36,14 +36,15 @@ public class ProductoServices {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Marca not found with id=" + dto.getMarcaId());
         }
 
-        Marca marca = new Marca(mDto.getId(), mDto.getNombre());
+        Marca marca = new Marca(mDto.getId(), mDto.getNombre(), mDto.getFoto());
 
         Producto p = new Producto(
                 dto.getId() != null ? dto.getId() : 0,
                 dto.getNombre(),
                 marca,
                 dto.getDescripcion(),
-                dto.isActivo()
+                dto.isActivo(),
+                dto.getFoto()
         );
         return productoRepository.save(p);
     }
@@ -53,8 +54,8 @@ public class ProductoServices {
         MarcaDto mDto = marcaRepository.getById(dto.getMarcaId());
         if(mDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Marca not found with id=" + dto.getMarcaId());
 
-        Marca marca = new Marca(mDto.getId(), mDto.getNombre());
-        Producto p = new Producto(id, dto.getNombre(), marca, dto.getDescripcion(), dto.isActivo());
+        Marca marca = new Marca(mDto.getId(), mDto.getNombre(), mDto.getFoto());
+        Producto p = new Producto(id, dto.getNombre(), marca, dto.getDescripcion(), dto.isActivo(), dto.getFoto());
         return productoRepository.save(p);
     }
 

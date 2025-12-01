@@ -47,6 +47,7 @@ public class MarcaRepositoryAdapter implements MarcaRepositoryPort {
             MarcaEntity existing = marcaRepository.findById(m.getId()).orElse(null);
             if(existing != null){
                 existing.setNombre(m.getNombre());
+                existing.setFoto(m.getFoto());
                 MarcaEntity saved = marcaRepository.save(existing);
                 return marcaMapper.ofEntitytoDto(saved);
             }

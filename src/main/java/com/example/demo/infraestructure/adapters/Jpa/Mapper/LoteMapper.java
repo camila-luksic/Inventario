@@ -56,7 +56,8 @@ public class LoteMapper {
                 entity.getProducto().getNombre(),
                 null,
                 entity.getProducto().getDescripcion(),
-                entity.getProducto().isActivo()
+                entity.getProducto().isActivo(),
+                entity.getProducto().getFoto()
             );
         }
         return new Lote(
