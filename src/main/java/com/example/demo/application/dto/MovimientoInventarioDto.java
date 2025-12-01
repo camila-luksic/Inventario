@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class MovimientoInventarioDto {
     private Long id;
+    private Long loteId;
     private Long productoId;
     private Long origenId;
     private Long destinoId;
@@ -12,9 +13,10 @@ public class MovimientoInventarioDto {
     private LocalDateTime fechaMovimiento;
     private String motivo;
 
-    public MovimientoInventarioDto(Long id, Long productoId, Long origenId, Long destinoId, int cantidad, String tipo, LocalDateTime fechaMovimiento, String motivo) {
+    public MovimientoInventarioDto(Long id,Long loteId ,Long productoId, Long origenId, Long destinoId, int cantidad, String tipo, LocalDateTime fechaMovimiento, String motivo) {
         this.id = id;
         this.productoId = productoId;
+        this.loteId = loteId;
         this.origenId = origenId;
         this.destinoId = destinoId;
         this.cantidad = cantidad;
@@ -31,4 +33,5 @@ public class MovimientoInventarioDto {
     public String getTipo() { return tipo; }
     public LocalDateTime getFechaMovimiento() { return fechaMovimiento; }
     public String getMotivo() { return motivo; }
+    public Long getLoteId() { return loteId; }
 }

@@ -18,7 +18,8 @@ public class LoteMapper {
             lote.getProducto().getId(),
             lote.getCodigoLote(),
             lote.getFechaVencimiento(),
-            lote.getCantidad()
+            lote.getCantidad(),
+                lote.isNotificacionActiva()
         );
     }
     

@@ -77,5 +77,13 @@ public class MovimientoInventarioEntity {
     public TipoMovimiento getTipo() { return tipo; }
     public LocalDateTime getFechaMovimiento() { return fechaMovimiento; }
     public String getMotivo() { return motivo; }
-}
 
+    public void setLote(LoteEntity lote) { this.lote = lote; }
+    public void setProducto(ProductoEntity producto) { this.producto = producto; }
+    public void setOrigen(SucursalEntity origen) { this.origen = origen; }
+    public void setDestino(SucursalEntity destino) { this.destino = destino; }
+    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+    public void setTipo(TipoMovimiento tipo) { this.tipo = tipo; }
+    public void setFechaMovimiento(LocalDateTime fechaMovimiento) { this.fechaMovimiento = fechaMovimiento; }
+    public void setMotivo(String motivo) { this.motivo = motivo; }
+}

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovimientoInventarioMapper {
     public MovimientoInventarioDto ofEntitytoDto(MovimientoInventarioEntity e){
-        return new MovimientoInventarioDto(e.getId(), e.getProducto() != null ? e.getProducto().getId() : null, e.getOrigen() != null ? e.getOrigen().getId() : null, e.getDestino() != null ? e.getDestino().getId() : null, e.getCantidad(), e.getTipo() != null ? e.getTipo().name() : null, e.getFechaMovimiento(), e.getMotivo());
+        return new MovimientoInventarioDto(e.getId(), e.getLote().getId() ,e.getProducto() != null ? e.getProducto().getId() : null, e.getOrigen() != null ? e.getOrigen().getId() : null, e.getDestino() != null ? e.getDestino().getId() : null, e.getCantidad(), e.getTipo() != null ? e.getTipo().name() : null, e.getFechaMovimiento(), e.getMotivo());
     }
 
     public List<MovimientoInventarioDto> offEntitytoDto(List<MovimientoInventarioEntity> list){

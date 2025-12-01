@@ -64,4 +64,18 @@ public class LoteServices {
         Lote saved = loteRepositoryPort.save(lote);
         return dtoMapper.ofModelToDto(saved);
     }
+
+    public LoteDto darDeBaja(Long loteId) {
+        java.util.Optional<Lote> maybe = loteRepositoryPort.getById(loteId);
+        Lote lote = maybe.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lote not found"));
+        try {
+            java.lang.reflect.Field f = Lote.class.getDeclaredField("activo");
+            f.setAccessible(true);
+            f.set(lote, false);
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
+        Lote saved = loteRepositoryPort.save(lote);
+        return dtoMapper.ofModelToDto(saved);
+    }
 }

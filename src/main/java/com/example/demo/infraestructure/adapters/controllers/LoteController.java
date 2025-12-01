@@ -45,4 +45,9 @@ public class LoteController {
     public ResponseEntity<LoteDto> toggleNotification(@PathVariable long id, @RequestParam boolean enabled){
         return ResponseEntity.ok(loteServices.toggleNotification(id, enabled));
     }
+
+    @PostMapping("/dar-de-baja/{id}")
+    @Operation(summary = "Dar de baja", description = "Marca un lote como inactivo")
+    @ApiResponse(responseCode = "200", description = "Lote dado de baja", content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoteDto.class)))
+    public ResponseEntity<LoteDto> darDeBaja(@PathVariable long id){ return ResponseEntity.ok(loteServices.darDeBaja(id)); }
 }

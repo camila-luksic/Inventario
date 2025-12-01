@@ -11,4 +11,5 @@ public interface LoteRepositoryPort {
     Optional<Lote> getById(Long id);
     Lote save(Lote lote);
     Lote save(Lote lote, Long productoId);
+    Lote darDeBaja(Long id);
 }

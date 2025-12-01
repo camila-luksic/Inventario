@@ -88,6 +88,19 @@ public class LoteRepositoryAdapter implements LoteRepositoryPort {
         }
         LoteEntity entity = loteMapper.ofModelToEntity(lote, productoEntity);
         LoteEntity saved = loteRepository.save(entity);
+
         return loteMapper.ofEntityToModel(saved);
+    }
+
+    @Override
+    public Lote darDeBaja(Long id) {
+        Optional<LoteEntity> maybe = loteRepository.findById(id);
+        if(maybe.isPresent()) {
+            LoteEntity existing = maybe.get();
+            existing.setDadoDeBaja(true);
+            LoteEntity saved = loteRepository.save(existing);
+            return loteMapper.ofEntityToModel(saved);
+        }
+        throw new RuntimeException("Lote not found for id: " + id);
     }
 }
