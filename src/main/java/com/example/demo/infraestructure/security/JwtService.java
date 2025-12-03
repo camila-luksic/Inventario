@@ -16,7 +16,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret:mi-clave-secreta-super-segura-de-256-bits-minimo}")
+    @Value("${jwt.secret:mi-clave-secreta-super-segura-de-512-bits-minimo-para-el-inventario-sistema-completo}")
     private String secretKey;
 
     @Value("${jwt.expiration:86400000}")
@@ -34,7 +34,7 @@ public class JwtService {
                 .subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
-                .signWith(getSigningKey())
+                .signWith(getSigningKey(), Jwts.SIG.HS512)
                 .compact();
     }
 

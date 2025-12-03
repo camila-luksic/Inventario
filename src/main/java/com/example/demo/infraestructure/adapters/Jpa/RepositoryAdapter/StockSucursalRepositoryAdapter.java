@@ -6,16 +6,24 @@ import com.example.demo.infraestructure.adapters.Jpa.JpaRepository.StockSucursal
 import com.example.demo.application.port.out.StockSucursalRepositoryPort;
 import com.example.demo.infraestructure.adapters.Jpa.Mapper.StockSucursalMapper;
 import com.example.demo.infraestructure.adapters.entity.StockSucursalEntity;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class StockSucursalRepositoryAdapter implements StockSucursalRepositoryPort {
-    private StockSucursalJpaRepository stockSucursalRepository;
-    private StockSucursalMapper stockSucursalMapper;
+    
+    private final StockSucursalJpaRepository stockSucursalRepository;
+    private final StockSucursalMapper stockSucursalMapper;
+
+    @Autowired
+    public StockSucursalRepositoryAdapter(StockSucursalJpaRepository stockSucursalRepository, 
+                                           StockSucursalMapper stockSucursalMapper) {
+        this.stockSucursalRepository = stockSucursalRepository;
+        this.stockSucursalMapper = stockSucursalMapper;
+    }
 
     @Override
     public List<StockSucursalDto> getAll(){

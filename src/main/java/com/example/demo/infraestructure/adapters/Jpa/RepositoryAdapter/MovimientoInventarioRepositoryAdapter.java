@@ -15,21 +15,37 @@ import com.example.demo.infraestructure.adapters.entity.StockSucursalEntity;
 
 import java.time.LocalDateTime;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class MovimientoInventarioRepositoryAdapter implements MovimientoInventarioRepositoryPort {
-    private MovimientoInventarioJpaRepository repo;
-    private MovimientoInventarioMapper mapper;
-    private StockSucursalJpaRepository stockSucursalRepo;
-    private ProductoJpaRepository productoRepo;
-    private SucursalJpaRepository sucursalRepo;
-    private LoteJpaRepository loteRepo;
+    
+    private final MovimientoInventarioJpaRepository repo;
+    private final MovimientoInventarioMapper mapper;
+    private final StockSucursalJpaRepository stockSucursalRepo;
+    private final ProductoJpaRepository productoRepo;
+    private final SucursalJpaRepository sucursalRepo;
+    private final LoteJpaRepository loteRepo;
+
+    @Autowired
+    public MovimientoInventarioRepositoryAdapter(
+            MovimientoInventarioJpaRepository repo,
+            MovimientoInventarioMapper mapper,
+            StockSucursalJpaRepository stockSucursalRepo,
+            ProductoJpaRepository productoRepo,
+            SucursalJpaRepository sucursalRepo,
+            LoteJpaRepository loteRepo) {
+        this.repo = repo;
+        this.mapper = mapper;
+        this.stockSucursalRepo = stockSucursalRepo;
+        this.productoRepo = productoRepo;
+        this.sucursalRepo = sucursalRepo;
+        this.loteRepo = loteRepo;
+    }
 
     @Override
     public List<MovimientoInventarioDto> getAll(){
